@@ -20,6 +20,6 @@ public class Cake extends Products {
     }
 
     public String displayProducts(){
-            return "Cake name: " + name + ", Filling 1: " + filling1 + ", Filling 2: " + filling2 + " Size: " + size + ", Price: " + calculatePrice();
+            return "Cake name: " + name + ", Filling 1: " + filling1.toString() + ", Filling 2: " + filling2.toString() + " Size: " + size + ", Price: " + calculatePrice();
     }
 }

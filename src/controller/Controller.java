@@ -1,6 +1,8 @@
 package controller;
 
 //only imports what is strictly necessary from view-package
+import model.Cake;
+import model.Fillings;
 import view.MainFrame;
 import view.ButtonType;
 
@@ -31,10 +33,10 @@ public class Controller {
         order1Simulation = new String[10];
         currentOrderArray = new String[10];
 
-        cakeMenuString[0] = "tårta0, storlek: 4 bitar, topping1, topping2, Pris0";
-        cakeMenuString[1] = "tårta1, storlek: 6 bitar, topping1, topping3, Pris1";
-        cakeMenuString[2] = "tårta2, storlek: 4 bitar, topping1, topping2, Pris2";
-        cakeMenuString[3] = "tårta3, storlek: 12 bitar,topping1, topping3, Pris3";
+        cakeMenuString[0] = new Cake("Strawberry Cake", 50, 6, Fillings.STRAWBERRY, Fillings.VANILLA);
+        cakeMenuString[1] = new Cake("Weddings Special Cake", 99, 10, Fillings.HUMMUS, Fillings.CHOCOLATE);
+        cakeMenuString[2] = new Cake("Strawberry Cake", 50, 6, Fillings.STRAWBERRY, Fillings.VANILLA);
+        cakeMenuString[3] = new Cake("Strawberry Cake", 50, 6, Fillings.STRAWBERRY, Fillings.VANILLA);
 
         perUnitItemMenuString[0] = "vetebulle, Pris11";
         perUnitItemMenuString[1] = "pepparkaka, Pris22";
