@@ -22,10 +22,21 @@ public class Cake extends Products {
 
 
     public int calculatePrice() {
-        return price * size + filling1.getPrice();
+        if(filling2==null) {
+            return price * size + filling1.getPrice();
+
+        } else {
+            return price * size + filling1.getPrice() + filling2.getPrice();
+        }
     }
 
     public String displayProducts(){
-        return name + " " + fillings + " " + size + " " + fillings.getPrice();
+        if (filling2 != null) {
+            return "Cake name: " + name + ", Filling 1: " + filling1 + ", Filling 2: " + filling2 + " Size: " + size + ", Price: " + calculatePrice();
+        }
+        else {
+            return "Cake name: "+ name + ", Filling " + filling1 + " Size: " + size +  ", Price: "  + calculatePrice();
+        }
+
     }
 }
