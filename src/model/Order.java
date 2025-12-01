@@ -8,7 +8,7 @@ public class Order {
         this.products = new Products[10];
     }
 
-    // Tillfälligt
+    // Tillfälligt, räknar ut totala priset
     public int totalPrice() {
         return 0;
     }
