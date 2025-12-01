@@ -13,4 +13,8 @@ public enum Pieces {
     public int getPrice(){
         return price;
     }
+
+    public String displayPieces() {
+        return this + ", " + this.price;
+    }
 }
