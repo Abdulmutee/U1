@@ -1,20 +1,17 @@
 package model;
 
-public enum Pieces {
-    BOUNTY(67),
-    ICECREAM(41),
-    WATER(21);
+public class Pieces extends Product {
 
-    private final int price;
-
-    Pieces(int price) {
+    public Pieces(String name, int price){
+        this.name = name;
         this.price = price;
     }
-    public int getPrice(){
-        return price;
+
+    public int getPrice() {
+        return this.price;
     }
 
-    public String displayPieces() {
-        return this + ", " + this.price;
+    public String displayProducts() {
+        return "Name: " + this.name + ", Price:" + this.price;
     }
 }
