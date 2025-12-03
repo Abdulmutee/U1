@@ -47,13 +47,13 @@ public class Controller {
 
         for (int i = 0; i<cakeList.length; i++){
             if (cakeList[i]!=null) {
-                cakeListString[i] = cakeList[i].displayProducts();
+                cakeListString[i] = cakeList[i].displayProduct();
             }
         }
 
         for (int i = 0; i<piecesList.length; i++){
             if (piecesList[i]!=null) {
-                piecesListString[i] = piecesList[i].displayProducts();
+                piecesListString[i] = piecesList[i].displayProduct();
             }
         }
 

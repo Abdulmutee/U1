@@ -19,7 +19,7 @@ public class Cake extends Product {
         return price * size + filling1.getPrice() + filling2.getPrice();
     }
 
-    public String displayProducts(){
+    public String displayProduct(){
             return "Cake name: " + name + ", Filling 1: " + filling1.toString() + ", Filling 2: " + filling2.toString() + " Size: " + size + ", Price: " + getPrice();
     }
 
