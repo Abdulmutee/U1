@@ -15,6 +15,7 @@ public class Cake extends Product {
     }
 
 
+
     public int getPrice() {
         return price * size + filling1.getPrice() + filling2.getPrice();
     }

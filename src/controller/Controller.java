@@ -8,6 +8,7 @@ import model.*;
 import view.MainFrame;
 import view.ButtonType;
 
+
 public class Controller {
     private MainFrame view;
     private ButtonType currentLeftMenu = ButtonType.NoChoice;

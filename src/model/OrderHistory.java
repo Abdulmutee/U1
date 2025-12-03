@@ -13,6 +13,7 @@ public class OrderHistory {
                 this.orders[i] = order;
                 return;
             }
+
         }
         Order[] newList = new Order[this.orders.length + 5];
 

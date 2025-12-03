@@ -11,6 +11,7 @@ public class Pieces extends Product {
         return this.price;
     }
 
+
     public String displayProducts() {
         return "Name: " + this.name + ", Price:" + this.price;
     }

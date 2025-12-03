@@ -41,6 +41,7 @@ public class Order {
         this.products = newList;
     }
 
+
     public String[] getProductsAsString() {
         String[] productsString = new String[products.length];
 
