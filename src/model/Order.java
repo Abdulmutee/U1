@@ -62,4 +62,5 @@ public class Order {
         this.totalPrice = summ;
         return summ;
     }
+
 }
