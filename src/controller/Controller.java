@@ -30,18 +30,6 @@ public class Controller {
         view.disableViewSelectedOrderButton();
 
 
-
-    }
-
-    //This method is only used for test purposes - remove when no longer needed
-    private void loadStringTestValues() {
-
-        order1Simulation = new String[10];
-        order1Simulation[0] = "Order 1";
-        order1Simulation[1] = "tårta1 Pris1";
-        order1Simulation[2] = "tårta2 Pris2";
-        order1Simulation[3] = "vetebulle Pris11";
-
     }
 
     //This method is called by class MainFrame when a button in the GUI is pressed
@@ -79,14 +67,13 @@ public class Controller {
         if (selectionIndex != -1){ // if something is selected in the left menu list
             switch (currentLeftMenu) {
                 case Cake:
-                    order.addProduct(cakeList[selectionIndex]); //for test purposes - needs to be replaced with solution of finding chosen menu item matching architecture for model
+                    order.addProduct(cakeList[selectionIndex]);
                     break;
                 case PerUnitItem:
                     order.addProduct(piecesList[selectionIndex]);
                     break;
             }
-            nbrOfOrders++; //for test purposes - need to be removed or changed when model for handling orders is implemented
-            costCurrentOrder = order.calculatePrice(); //for test purposes - replace with calculation of cost when how orders are handled is implemented in model
+            costCurrentOrder = order.calculatePrice();
 
 
 
@@ -97,7 +84,6 @@ public class Controller {
     }
 
     public void viewSelectedOrder(int selectionIndex){
-        System.out.println("Index selection left panel: " + selectionIndex); //for test purposes  - remove when not needed
 
         if ((selectionIndex != -1) && currentLeftMenu==ButtonType.OrderHistory){
 
@@ -133,7 +119,7 @@ public class Controller {
 
         currentLeftMenu = ButtonType.Cake;
         view.populateLeftPanel(cakeListString);
-        view.populateRightPanel(order.getProductsAsString()); //update left panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
+        view.populateRightPanel(order.getProductsAsString()); //update right panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
         view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder)); //set the text to show cost of current order
         view.enableAllButtons();
         view.disableCakeMenuButton();
@@ -141,6 +127,22 @@ public class Controller {
     }
 
     public void setToPerUnitItemMenu() {
+        piecesList = new Pieces[10];
+        piecesListString = new String[piecesList.length];
+
+        Pieces bounty = new Pieces("Bounty", 21);
+        Pieces iceCream = new Pieces("Cream", 41);
+        Pieces water = new Pieces("Water", 67);
+        piecesList[0] = bounty;
+        piecesList[1] = iceCream;
+        piecesList[2] = water;
+
+        for (int i = 0; i<piecesList.length; i++){
+            if (piecesList[i]!=null) {
+                piecesListString[i] = piecesList[i].displayProducts();
+            }
+        }
+
         currentLeftMenu = ButtonType.PerUnitItem;
         view.populateLeftPanel(piecesListString);
         view.populateRightPanel(order.getProductsAsString()); //update right panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
@@ -160,9 +162,9 @@ public class Controller {
     }
 
     public void placeOrder() {
-        System.out.println("Pressed Order to create a new order"); //for test purposes - remove when not needed more
-
-        orderHistory.addOrder(order);
+        if (order.getProducts()[0]!=null) { // Checks if orderlist is empty
+            orderHistory.addOrder(order);
+        }
         this.order = new Order();
 
         costCurrentOrder = 0;
