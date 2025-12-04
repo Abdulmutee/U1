@@ -87,9 +87,9 @@ public class Controller {
 
         if ((selectionIndex != -1) && currentLeftMenu==ButtonType.OrderHistory){
 
-            if (orderHistory.orders[selectionIndex] != null) {
-                costCurrentOrder = orderHistory.orders[selectionIndex].getTotalPrice();
-                view.populateRightPanel(orderHistory.orders[selectionIndex].getProductsAsString()); //update right panel with order details - this takes a shortcut in updating the entire information in the panel not just adds to the end
+            if (orderHistory.getOrders()[selectionIndex] != null) {
+                costCurrentOrder = orderHistory.getOrders()[selectionIndex].getTotalPrice();
+                view.populateRightPanel(orderHistory.getOrders()[selectionIndex].getProductsAsString()); //update right panel with order details - this takes a shortcut in updating the entire information in the panel not just adds to the end
                 view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder)); //set the text to show cost of current order
             }
         }
