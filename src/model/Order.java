@@ -64,5 +64,7 @@ public class Order {
         return summ;
     }
 
-
+    public Product[] getProducts() {
+        return products;
+    }
 }

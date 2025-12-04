@@ -1,7 +1,6 @@
 package controller;
 
-// 1. Rad 137, fixa att kunna se vad som är i historik.
-// 2. Se till att test metoder är tagna bort/ersatta.
+
 
 //only imports what is strictly necessary from view-package
 import model.*;
@@ -12,57 +11,20 @@ import view.ButtonType;
 public class Controller {
     private MainFrame view;
     private ButtonType currentLeftMenu = ButtonType.NoChoice;
-    private Cake [] cakeList; // for test purposes only
+    private Cake [] cakeList;
     private String[] cakeListString;
     private Pieces[] piecesList;
     private String[] piecesListString;
     private OrderHistory orderHistory;
-    private String [] order1Simulation; // for test purposes only
-    private double costCurrentOrder = 0; // for test purposes only
-    private int nbrOfOrders = 0; // for test purposes only
+    private double costCurrentOrder = 0;
     private Order order;
 
     public Controller() {
 
-        cakeList  = new Cake[10];
-        cakeListString = new String[cakeList.length];
-        piecesList = new Pieces[10];
-        piecesListString = new String[piecesList.length];
-
-        Cake strawberryCake = new Cake("Strawberry Cake", 50, 6, Fillings.STRAWBERRY, Fillings.VANILLA);
-        Cake ChockoHummusCake = new Cake("ChockoHummusCake", 1000, 1, Fillings.CHOCOLATE, Fillings.HUMMUS);
-        Cake weddingCake = new Cake("Wedding Special Cake", 99, 10, Fillings.CHOCOLATE, Fillings.VANILLA);
-        Cake bestCake = new Cake("Best Cake", 10000, 1, Fillings.LICORICE, Fillings.HUMMUS);
-
-        cakeList[0] = strawberryCake;
-        cakeList[1] = ChockoHummusCake;
-        cakeList[2] = weddingCake;
-        cakeList[3] = bestCake;
-
-        Pieces bounty = new Pieces("Bounty", 21);
-        Pieces iceCream = new Pieces("Cream", 41);
-        Pieces water = new Pieces("Water", 67);
-        piecesList[0] = bounty;
-        piecesList[1] = iceCream;
-        piecesList[2] = water;
-
-        for (int i = 0; i<cakeList.length; i++){
-            if (cakeList[i]!=null) {
-                cakeListString[i] = cakeList[i].displayProducts();
-            }
-        }
-
-        for (int i = 0; i<piecesList.length; i++){
-            if (piecesList[i]!=null) {
-                piecesListString[i] = piecesList[i].displayProducts();
-            }
-        }
-
         this.order = new Order();
         this.orderHistory = new OrderHistory();
 
-        view = new MainFrame(1000, 500, this);
-        loadStringTestValues(); //for test purposes - remove when not needed more
+        view = new MainFrame(1200, 500, this);
         view.enableAllButtons();
         view.disableAddMenuButton();
         view.disableViewSelectedOrderButton();
@@ -113,10 +75,9 @@ public class Controller {
     }
 
     public void addItemToOrder(int selectionIndex) {
-        System.out.println("Index selection left panel: " + selectionIndex); //for test purposes  - remove when not needed
 
         if (selectionIndex != -1){ // if something is selected in the left menu list
-            switch (currentLeftMenu) { //This might need to change depending on architecture
+            switch (currentLeftMenu) {
                 case Cake:
                     order.addProduct(cakeList[selectionIndex]); //for test purposes - needs to be replaced with solution of finding chosen menu item matching architecture for model
                     break;
@@ -129,7 +90,7 @@ public class Controller {
 
 
 
-            view.populateRightPanel(order.getProductsAsString()); //update left panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
+            view.populateRightPanel(order.getProductsAsString()); //update right panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
             view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder)); //set the text to show cost of current order
         }
 
@@ -139,13 +100,37 @@ public class Controller {
         System.out.println("Index selection left panel: " + selectionIndex); //for test purposes  - remove when not needed
 
         if ((selectionIndex != -1) && currentLeftMenu==ButtonType.OrderHistory){
-            costCurrentOrder = 100; //for test purposes - replace with calculation of cost when how orders are handled is implemented in model
-            view.populateRightPanel(order1Simulation); //update left panel with order details - this takes a shortcut in updating the entire information in the panel not just adds to the end
-            view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder)); //set the text to show cost of current order
+
+            if (orderHistory.orders[selectionIndex] != null) {
+                costCurrentOrder = orderHistory.orders[selectionIndex].getTotalPrice();
+                view.populateRightPanel(orderHistory.orders[selectionIndex].getProductsAsString()); //update right panel with order details - this takes a shortcut in updating the entire information in the panel not just adds to the end
+                view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder)); //set the text to show cost of current order
+            }
         }
     }
 
     public void setToCakeMenu() {
+
+        cakeList  = new Cake[10];
+        cakeListString = new String[cakeList.length];
+
+
+        Cake strawberryCake = new Cake("Strawberry Cake", 50, 6, Fillings.STRAWBERRY, Fillings.VANILLA);
+        Cake ChockoHummusCake = new Cake("ChockoHummusCake", 1000, 1, Fillings.CHOCOLATE, Fillings.HUMMUS);
+        Cake weddingCake = new Cake("Wedding Special Cake", 99, 10, Fillings.CHOCOLATE, Fillings.VANILLA);
+        Cake bestCake = new Cake("Best Cake", 10000, 1, Fillings.LICORICE, Fillings.HUMMUS);
+
+        cakeList[0] = strawberryCake;
+        cakeList[1] = ChockoHummusCake;
+        cakeList[2] = weddingCake;
+        cakeList[3] = bestCake;
+
+        for (int i = 0; i<cakeList.length; i++){
+            if (cakeList[i]!=null) {
+                cakeListString[i] = cakeList[i].displayProducts();
+            }
+        }
+
         currentLeftMenu = ButtonType.Cake;
         view.populateLeftPanel(cakeListString);
         view.populateRightPanel(order.getProductsAsString()); //update left panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
@@ -158,7 +143,7 @@ public class Controller {
     public void setToPerUnitItemMenu() {
         currentLeftMenu = ButtonType.PerUnitItem;
         view.populateLeftPanel(piecesListString);
-        view.populateRightPanel(order.getProductsAsString()); //update left panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
+        view.populateRightPanel(order.getProductsAsString()); //update right panel with new item - this takes a shortcut in updating the entire information in the panel not just adds to the end
         view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder)); //set the text to show cost of current order
         view.enableAllButtons();
         view.disablePerUnitItemMenuButton();

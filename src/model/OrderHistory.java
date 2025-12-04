@@ -1,7 +1,7 @@
 package model;
 
 public class OrderHistory {
-    Order[] orders;
+    public Order[] orders;
 
     public OrderHistory() {
         this.orders = new Order[10];
